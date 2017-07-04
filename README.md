@@ -10,7 +10,6 @@ This has been tested to work on the following systems:
 
 - Debian 8 Jessie
 - Debian 9 Wheezy
-
 - MySQL 5.7.18
 - MySQLdump 10.13
 
