@@ -21,11 +21,11 @@ In order for this script to work correctly you first must ensure that you have c
 
 The mysql_backup_script.sh should be placed in this location.
 
-Once the script is in the correct location then the following information is required:
+Once the script is in the correct location then the following information is required to be entered on the backup script:
 
-- The database you are wanting to backup
-- The username with access to the database to backup
-- The password to the username being used to access the MySQL database
+- The database you are wanting to backup (line 4 "db_name").
+- The username with access to the database to backup (line 7 "user").
+- The password to the username being used to access the MySQL database (line 8 "password").
 - The host of the MySQL database (if this is your local machine then the default value of 127.0.0.1 will be fine)
 
 Once the information above has been inserted then the permissions of the file should be changed:
