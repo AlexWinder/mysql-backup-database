@@ -1,22 +1,32 @@
 #!/bin/bash
 
-# Specify which databases are to be backed up
+# Specify which database is to be backed up
 db_name=""
 
-# Database credentials
-user=""
-password=""
-host="127.0.0.1"
+# Set the website which this database relates to
+website=""
 
-# Other options
-backup_path="/var/backups/mysql"
+# Database credentials
+user="root"
+password=""
+host="localhost"
+
+# Set the date
 date=$(date +"%Y%m%d-%H%M")
+
+# Set the location of where backups will be stored
+backup_location="/var/backups/mysql"
+
+# Create the directory for the website if it doesn't already exist
+mkdir -p ${backup_location}/${website}
+# Append the database name with the date to the backup location
+backup_full_name="${backup_location}/${website}/${db_name}-${date}.sql"
 
 # Set default file permissions
 umask 177
 
 # Dump database into SQL file
-mysqldump --lock-tables --user=$user --password=$password --host=$host $db_name                                                                                                                                                              > $backup_path/$db_name-$(hostname -f)-$date.sql
+mysqldump --lock-tables --user=$user --password=$password --host=$host $db_name > $backup_full_name
 
 # Delete files older than 30 days
-find $backup_path/$db_name*.sql -mtime +30 -type f -delete
+find $backup_full_name -mtime +30 -type f -delete
