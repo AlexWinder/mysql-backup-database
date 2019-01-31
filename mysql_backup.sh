@@ -11,6 +11,13 @@ user="root"
 password=""
 host="localhost"
 
+# How many days would you like to keep files for?
+days="30"
+
+######################################################
+##### EDITING BELOW MAY CAUSE UNEXPECTED RESULTS #####
+######################################################
+
 # Set the date
 date=$(date +"%Y%m%d-%H%M")
 
@@ -28,5 +35,5 @@ umask 177
 # Dump database into SQL file
 mysqldump --lock-tables --user=$user --password=$password --host=$host $db_name > $backup_full_name
 
-# Delete files older than 30 days
-find $backup_full_name -mtime +30 -type f -delete
+# Delete files older than the number of days defined
+find $backup_full_name -mtime +${days} -type f -delete
