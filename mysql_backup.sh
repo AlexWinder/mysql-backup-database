@@ -35,5 +35,7 @@ umask 177
 # Dump database into SQL file
 mysqldump --lock-tables --user=$user --password=$password --host=$host $db_name > $backup_full_name
 
+# Set a value to be used to find all backups with the same name
+find_backup_name="${backup_location}/${website}/${db_name}-*.sql"
 # Delete files older than the number of days defined
-find $backup_full_name -mtime +${days} -type f -delete
+find $find_backup_name -mtime +$days -type f -delete
