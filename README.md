@@ -1,4 +1,4 @@
-# Single MySQL Database Backup
+# MySQL Database Backup
 
 This is a simple BASH script which can be run on Linux systems running MySQL server which also has MySQLdump enabled.
 
@@ -31,7 +31,7 @@ In order for this script to work correctly it is advised that create the correct
 
 > mkdir -p /var/backups/mysql
 
-The [mysql_backup.sh](mysql_backup.sh) should be placed in this location.
+The [backup.sh](backup.sh) should be placed in this location.
 
 #### Configure Values
 
@@ -48,7 +48,7 @@ Once the script is in the correct location then the following information is req
 
 Once the information above has been inserted then the permissions of the file should be changed:
 
-> chmod 700 /var/backups/mysql/mysql_backup
+> chmod 700 /var/backups/mysql/backup.sh
 
 If you have specified a different location to the example given above then you will need to adjust the location accordingly.
 
@@ -56,7 +56,7 @@ If you have specified a different location to the example given above then you w
 
 The file can then be tested to see if all things work as expected.
 
-> ./var/backups/mysql/mysql_backup
+> ./var/backups/mysql/backup.sh
 
 If you have specified a different location to the example given above then you will need to adjust the location accordingly.
 
@@ -72,7 +72,7 @@ The script can now be added to the crontab, if required, to run automatically. T
 
 Then append the end of the crontab with a new line:
 
-> 0 0 * * * /var/backups/mysql/mysql_backup
+> 0 0 * * * /var/backups/mysql/backup.sh
 
 This will cause the script to run every day at 00:00, from the current logged in user. If you wish to run as a different user then you will need to open the crontab for that particular user. This crontab will create a backup of the MySQL database specified.
 
