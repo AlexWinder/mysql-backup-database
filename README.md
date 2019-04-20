@@ -1,6 +1,6 @@
 # MySQL Database Backup
 
-This is a simple BASH script which can be run on Linux systems running MySQL server which also has MySQLdump enabled.
+This is a simple BASH script which can be run on Linux systems running MySQL server which also has MySQLdump enabled. This is used to backup a MySQL database. This can then be run as part of a cron job to easily back up databases to another location.
 
 ## Contributors
 
@@ -56,7 +56,7 @@ If you have specified a different location to the example given above then you w
 
 The file can then be tested to see if all things work as expected.
 
-> ./var/backups/mysql/backup.sh
+> /var/backups/mysql/backup.sh
 
 If you have specified a different location to the example given above then you will need to adjust the location accordingly.
 
