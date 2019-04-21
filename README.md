@@ -18,7 +18,7 @@ To be able to use this you must have the following installed:
 This script has been tested to work on the following systems:
 
 - Debian 8 Jessie
-- Debian 9 Wheezy
+- Debian 9 Stretch
 - MySQL 5.7
 - MariaDB 10.1
 - MySQLdump 10
