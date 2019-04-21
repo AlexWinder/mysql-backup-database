@@ -76,6 +76,14 @@ Then append the end of the crontab with a new line:
 
 This will cause the script to run every day at 00:00, from the current logged in user. If you wish to run as a different user then you will need to open the crontab for that particular user. This crontab will create a backup of the MySQL database specified.
 
+### Extracting Backup
+
+If you wish to extract a particular backup you can do so with the following command:
+
+> tar -xvf /var/backups/mysql/www.example.com/exampledatabase_-DATE-TIME.tar.gz
+
+You should swap in the path and filename as per your own setup.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md).
