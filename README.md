@@ -6,9 +6,7 @@ This is a simple BASH script which can be run on Linux systems running MySQL ser
 
 - [Alex Winder](https://www.alexwinder.uk) 
 
-## Getting Started
-
-### Prerequisites
+## Prerequisites
 
 To be able to use this you must have the following installed:
 
@@ -19,70 +17,58 @@ This script has been tested to work on the following systems:
 
 - Debian 8 Jessie
 - Debian 9 Stretch
+- Ubuntu 22
 - MySQL 5.7
-- MariaDB 10.1
+- MariaDB 10.1 & 10.6
 - MySQLdump 10
 
-### Installing
+## Usage 
 
-#### Store the Backup Script
+The [mysql-database-backup.sh](mysql-database-backup.sh) script has been designed to work as simply as possible.
 
-In order for this script to work correctly it is advised that create the correct folder to place the script. For example, ```/var/backups/mysql```
+The script accepts a number of named parameters which allows you to customise it for your particular environment.
 
-> mkdir -p /var/backups/mysql
+- `--help` - Show a help guide on the script. If used then no other parameters will be considered.
+- `--to` - Where you would like to back the files up to. Default: `/var/backups/mysql`.
+- `--database` - The name of the database which you would like to back up. This is a required value.
+- `--user` - The username which will be used to access the database and run a backup. Default: `root`.
+- `--password` - The password relating to the 'user'. Default: `""`.
+- `--host` - The MySQL/MariaDB server which hosts the database. Default: `localhost`.
+- `--days` - The number of days to keep backup files before deleting them. Default: `30` (days).
 
-The [mysql-database-backup.sh](mysql-database-backup.sh) should be placed in this location.
+The script is then executed on the command line, with the minimum required parameter of `--database`.
 
-#### Configure Values
+```bash
+./mysql-database-backup.sh --database <database_name>
+```
 
-Once the script is in the correct location then the following information is required to be entered on the backup script:
+This will create the database backup in the value set in the `--to` parameter, by default this is `/var/backups/mysql`. Please note that this directory will be created if it doesn't already exist.
 
-- The database you are wanting to backup (line 4 "db_name").
-- The website which the database relates to (line 7 "website").
-- The username with access to the database to backup (line 10 "user").
-- The password to the username being used to access the MySQL database (line 11 "password"). If no password is required then this can be left as an empty string.
-- The host of the MySQL database (line 12 "host"). If this is your local machine then the default value of 127.0.0.1 will be fine.
-- The number of days you wish to store SQL backup files for (line 15 "days"). This is by default set to 30 days.
+You are free to make use of any of the named parameters to customise for your particular usecase. An example usage is listed below:
 
-#### Change Permissions
+```bash
+./mysql-database-backup.sh --database my_website_database --to /home/user/backups --user w_user1 --password TopSecretSQLPassword --host db.container --days 1000
+```
 
-Once the information above has been inserted then the permissions of the file should be changed:
-
-> chmod 700 /var/backups/mysql/mysql-database-backup.sh
-
-If you have specified a different location to the example given above then you will need to adjust the location accordingly.
-
-#### Test Script
-
-The file can then be tested to see if all things work as expected.
-
-> /var/backups/mysql/mysql-database-backup.sh
-
-If you have specified a different location to the example given above then you will need to adjust the location accordingly.
-
-A new directory should be created which will be the same as the value in set in the "website" value. Inside this directory should be a complete SQLdump of the database defined.
+The above example will backup the `my_website_database` database as an SQL dump into the `/home/user/backups` directory, making use of a user of `w_user1` with a password of `TopSecretSQLPassword`, on the MySQL/MariaDB server host of `db.container`. Backups will be kept for a minimum of `1000` days before being deleted automatically when the script is next run.
 
 If you receive a warning message when testing then double check your values; in particular the database, username, password, and host values. If you are still experiencing issues then it is possible that the user you are connecting as may not have the relevant permissions to run mysqldump.
 
-#### Automate via Cron
+## Automate via Cron
 
 The script can now be added to the crontab, if required, to run automatically. To do this first open the crontab:
 
-> crontab -e
+```bash
+crontab -e
+```
 
 Then append the end of the crontab with a new line:
 
-> 0 0 * * * /var/backups/mysql/mysql-database-backup.sh
+```bash
+0 0 * * * /var/backups/mysql/mysql-database-backup.sh --database <database_name>
+```
 
-This will cause the script to run every day at 00:00, from the current logged in user. If you wish to run as a different user then you will need to open the crontab for that particular user. This crontab will create a backup of the MySQL database specified.
-
-### Extracting Backup
-
-If you wish to extract a particular backup you can do so with the following command:
-
-> tar -xvf /var/backups/mysql/www.example.com/exampledatabase_-DATE-TIME.tar.gz
-
-You should swap in the path and filename as per your own setup.
+This will cause the script to run every day at 00:00, from the current logged in user. If you wish to run as a different user then you will need to open the crontab for that particular user. This crontab will create a backup of the MySQL/MariaDB database specified.
 
 ## License
 
