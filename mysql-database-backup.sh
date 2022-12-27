@@ -26,8 +26,8 @@ while [ $# -gt 0 ]; do
         echo
         echo "Let's Encrypt Backup Script"
         echo
-        echo "This script allows you to easily backup configuration settings, keys and certificates issued by Let's Encrypt."
-        echo "https://github.com/AlexWinder/letsencrypt-backup"
+        echo "This script allows you to easily backup a MySQL or MariaDB database to an SQL dump."
+        echo "https://github.com/AlexWinder/mysql-backup-database"
         echo
         echo "Options:"
         echo
