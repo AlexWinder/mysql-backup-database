@@ -24,7 +24,7 @@ while [ $# -gt 0 ]; do
     # If help has been requested
     if [[ $1 == *"--help" ]]; then
         echo
-        echo "Let's Encrypt Backup Script"
+        echo "MySQL/MariaDB Backup Script"
         echo
         echo "This script allows you to easily backup a MySQL or MariaDB database to an SQL dump."
         echo "https://github.com/AlexWinder/mysql-backup-database"
