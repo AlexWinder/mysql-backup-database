@@ -4,7 +4,7 @@ This is a simple BASH script which can be run on Linux systems with the `mysqldu
 
 ## Contributors
 
-- [Alex Winder](https://www.alexwinder.uk) 
+- [Alex Winder](https://alexwinder.com) 
 
 ## Prerequisites
 
