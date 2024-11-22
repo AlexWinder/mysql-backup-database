@@ -18,6 +18,9 @@ to="${to:-/var/backups/mysql}"
 # How many days would you like to keep files for?
 days="${days:-30}"
 
+# What port does the database service listen on?
+port="${port:-3306}"
+
 # Enable named parameters to be passed in
 while [ $# -gt 0 ]; do
 
@@ -36,6 +39,7 @@ while [ $# -gt 0 ]; do
         echo "--user      The username which will be used to access the database and run a backup. Default: ${user}"
         echo "--password  The password relating to the 'user'. Default: ${password}"
         echo "--host      The MySQL/MariaDB server which hosts the database. Default: ${host}"
+        echo "--port      The TCP which the MySQL/MariaDB service is listening on. Default: ${port}"
         echo "--days      The number of days to keep backup files before deleting them. Default: ${days} (days)"
         echo "--help      Display help about this script"
         echo
@@ -73,7 +77,7 @@ backup_full_name="${to}/${database}-${date}.sql"
 umask 177
 
 # Dump database into SQL file
-mysqldump --lock-tables --user=$user --password=$password --host=$host $database > $backup_full_name
+mysqldump --lock-tables --user=$user --password=$password --host=$host --port=$port $database > $backup_full_name
 
 # Set a value to be used to find all backups with the same name
 find_backup_name="${to}/${database}-*.sql"
