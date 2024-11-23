@@ -33,7 +33,6 @@ The [mysql-database-backup.sh](mysql-database-backup.sh) accepts a number of nam
 - `--user` - The username which will be used to access the database and run a backup. Default: `root`.
 - `--password` - The password relating to the 'user'. Default: `""`.
 - `--host` - The MySQL/MariaDB server which hosts the database. Default: `localhost`.
-- `--port` - The TCP port which the MySQL/MariaDB server is listening on. Default: `3306`.
 - `--days` - The number of days to keep backup files before deleting them. Default: `30` (days).
 
 The script is then executed on the command line, with the minimum required parameter of `--database`.
